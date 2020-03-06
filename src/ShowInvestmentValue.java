@@ -21,6 +21,7 @@ public class ShowInvestmentValue extends Application {
         pane.setVgap(5);
         pane.setHgap(5);
 
+        //create necessary text fields and their labels
         pane.add(new Label("Investment Amount"),0,0);
         TextField tAmount = new TextField();
         pane.add(tAmount, 1,0);
@@ -37,6 +38,7 @@ public class ShowInvestmentValue extends Application {
         TextField tValue = new TextField();
         pane.add(tValue, 1 ,3);
 
+        //create calculate button
         Button btCalculate = new Button("Calculate");
         pane.add(btCalculate, 1,4);
         GridPane.setHalignment(btCalculate, HPos.RIGHT);
@@ -44,10 +46,13 @@ public class ShowInvestmentValue extends Application {
         btCalculate.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                //assign values entered by the user to the corresponding variables
                 int amount = Integer.parseInt(tAmount.getText());
                 int years = Integer.parseInt(tYears.getText());
                 float interest = Float.valueOf(tInterest.getText());
+                //calculate monthly interest
                 float monthly = interest /(12*100);
+                //calculate the future value of the investment and output it
                 double value = amount * Math.pow((1 + monthly),(years*12));
                 tValue.setText(String.format("%.2f",value));
             }
